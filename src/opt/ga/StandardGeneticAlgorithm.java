@@ -1,7 +1,7 @@
 package opt.ga;
 
 import java.util.Random;
-
+import java.io.*;
 import dist.DiscreteDistribution;
 
 import opt.OptimizationAlgorithm;
@@ -122,6 +122,14 @@ public class StandardGeneticAlgorithm extends OptimizationAlgorithm {
         // the new generation
         population = newPopulation;
         values = newValues;
+	//write new curval
+	try (BufferedWriter f = new BufferedWriter(new FileWriter("gaTSP.csv",true))) {
+		f.write(String.valueOf(sum / populationSize));
+		f.write(",");
+		f.close();
+	} catch (IOException e) {
+		System.out.println("error");
+	} 	
         return sum / populationSize;
     }
 
