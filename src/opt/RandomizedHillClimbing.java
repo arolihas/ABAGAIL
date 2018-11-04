@@ -1,7 +1,7 @@
 package opt;
 
 import shared.Instance;
-
+import java.io.*;
 /**
  * A randomized hill climbing algorithm
  * @author Andrew Guillory gtg008g@mail.gatech.edu
@@ -39,6 +39,14 @@ public class RandomizedHillClimbing extends OptimizationAlgorithm {
             curVal = neighVal;
             cur = neigh;
         }
+	//write curvals to a fle
+	try (BufferedWriter f = new BufferedWriter(new FileWriter("rhcTSP.csv",true))) {
+		f.write(String.valueOf(curVal));
+		f.write(",");
+		f.close();
+	} catch (IOException e) {
+		System.out.println("error");
+	} 	
         return curVal;
     }
 

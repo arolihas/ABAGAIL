@@ -3,6 +3,7 @@ package opt;
 import dist.Distribution;
 
 import shared.Instance;
+import java.io.*;
 
 /**
  * A simulated annealing hill climbing algorithm
@@ -58,6 +59,15 @@ public class SimulatedAnnealing extends OptimizationAlgorithm {
             cur = neigh;
         }
         t *= cooling;
+
+	//write curvals to a file 
+	try (BufferedWriter f = new BufferedWriter(new FileWriter("saTSP.csv",true))) {
+		f.write(String.valueOf(curVal));
+		f.write(",");
+		f.close();
+	} catch (IOException e) {
+		System.out.println("error");
+	} 	
         return curVal;
     }
 
